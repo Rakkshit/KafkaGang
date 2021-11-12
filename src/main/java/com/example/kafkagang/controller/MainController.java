@@ -12,11 +12,11 @@ public class MainController{
     @Autowired
     TestProducer testProducer;
 
-    @GetMapping("/hello/{msg}")
-    public String helloKafka(@PathVariable String msg){
+    @GetMapping("/hello/{name}")
+    public String helloKafka(@PathVariable String  name){
 
-        Employee employee = Employee.newBuilder().setFirstName("Kripa").setLastName("Nepal").setAge(2).setPhoneNumber("123").build();
-
+        Employee employee = Employee.newBuilder().setFirstName(name).setLastName("Nepal").setPhoneNumber("123").build();
+        //testProducer.doIt();
         testProducer.send(employee);
         return "Hello Kafka";
     }
