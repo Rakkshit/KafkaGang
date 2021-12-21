@@ -1,46 +1,54 @@
+##
+##spring:
+##    cloud:
+##        stream:
+##            schema-registry-client:
+##                endpoint: http://localhost:8081
+##            bindings:
+##                kripa:
+##                    content-type: application/*+avro
+##                    binder: kafka
+##                    destination: Shanta
+##                    producer:
+##                        useNativeEncoding: true
+##                        bootstrap-servers: http://localhost:9092
+##                        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+##                        value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+##            kafka:
+##                streams:
+##                    binder:
+##                        brokers: http://localhost:9092
+##                        configuration:
+##                            schema.registry.url: http://localhost:8081
+##                    bindings:
+##                        kripa:
+##                            producer:
+##                                valueSerde : io.confluent.kafka.serdes.avro.SpecificAvroSerde
+#
 #
 #spring:
 #    cloud:
 #        stream:
-#            schema-registry-client:
-#                endpoint: http://localhost:8081
+#            default:
+#                producer:
+#                    useNativeEncoding: true
 #            bindings:
-#                kripa:
-#                    content-type: application/*+avro
-#                    binder: kafka
+#                output:
 #                    destination: Shanta
+#                    content-type: application/*+avro
 #                    producer:
-#                        useNativeEncoding: true
-#                        bootstrap-servers: http://localhost:9092
-#                        key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#                        value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+#                        error-channel-enabled: true
 #            kafka:
-#                streams:
-#                    binder:
-#                        brokers: http://localhost:9092
-#                        configuration:
-#                            schema.registry.url: http://localhost:8081
-#                    bindings:
-#                        kripa:
-#                            producer:
-#                                valueSerde : io.confluent.kafka.serdes.avro.SpecificAvroSerde
-
-
-spring:
-    cloud:
-        stream:
-            default:
-                producer:
-                    useNativeEncoding: true
-            bindings:
-                output:
-                    destination: Shanta
-                    content-type: application/*+avro
-            kafka:
-                binder:
-                    brokers: http://localhost:9092
-                    replicationFactor: 1
-                    producer-properties:
-                        key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-                        value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-                        schema.registry.url: http://localhost:8081
+#                binder:
+#                    brokers: http://localhost:9092
+#                    replicationFactor: 1
+#                    producer-properties:
+#                        key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+#                        value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+#                        schema.registry.url: http://localhost:8081
+#
+#                bindings:
+#                    output:
+#                        producer:
+#                                recordMetadetaChannel: messageChannelOutput
+#
